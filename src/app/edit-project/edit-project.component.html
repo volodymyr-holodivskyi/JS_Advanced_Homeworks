@@ -1,0 +1,9 @@
+
+<form *ngIf='onEdit'>
+   <input type="text" placeholder="Project name" #projectName [value]='name' (input)='showCheckmark()'>
+   <textarea aria-placeholder="Project description"  #projectDescription [value]="description" (input)='showCheckmark()'></textarea>
+   <input type="button" value="✓" (click)='showModalEditPanel(projectName.value,projectDescription.value)' *ngIf='checkmark'>
+   <app-modal *ngIf='showModalEdit' (modalRespond)='valueChange($event)'></app-modal>
+   <input type="button" value="🗑" (click)='showModalDeletePanel()'>
+   <app-modal *ngIf='showModalDelete' (modalRespond)=valueChange($event)></app-modal>
+</form>  

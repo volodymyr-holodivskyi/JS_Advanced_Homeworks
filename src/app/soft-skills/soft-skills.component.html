@@ -1,0 +1,16 @@
+<div class="header">Soft&Technical skills</div>
+<div *ngFor="let skill of skills;let index=index" class="skill">
+    <div class="d-flex">
+        <span class="skillName">{{skill.name}}</span>
+        <button (click)="showDesc(index)">
+            <div class="arrow-bottom"></div>
+        </button>
+         <div *ngIf="skill.showDescription" class="skillDesc">{{skill.description}}</div>
+         <span *ngIf='onEdit'(click)='showEditPanel(index)'>✐</span>
+    </div>
+    <div *ngIf='onEdit'>
+        <div *ngIf='skill.onEdit'>
+            <app-edit-project [type]='skill.type' [name]="skill.name" [description]="skill.description" [index]='index'></app-edit-project>
+        </div>
+    </div>
+</div>

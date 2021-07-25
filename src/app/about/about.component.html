@@ -1,0 +1,35 @@
+<div class="d-flex flex-wrap">
+    <div class="w-50">
+        <div class="d-flex jc-spc-btw h-75">
+            <div class="d-flex">
+                <div class="logo"></div> 
+                <div>
+                    <div class="fs-18">{{info.firstName}} {{info.lastName}}<span *ngIf='onEdit' (click)='showEditPanel("name")' class="fs-18">✐</span></div>
+                    <div *ngIf='onEdit'>
+                        <div *ngIf='editName'>
+                            <input type="text" [value]="info.firstName" #firstName (input)='showNameCheck()'>
+                            <input type="text" [value]="info.lastName" #lastName (input)='showNameCheck()'>
+                            <span (click)='modalName(firstName.value,lastName.value)' *ngIf='saveNewName'>✓</span>
+                            <app-modal *ngIf='showModalName' (modalRespond)='showModal($event)'></app-modal>
+                        </div>
+                        </div>
+                    <div class="fs-18">{{info.email}}<span *ngIf='onEdit' (click)='showEditPanel("email")' class="fs-18">✐</span></div>
+                    <div *ngIf='onEdit'>
+                        <div *ngIf='editEmail'>
+                            <input type="text" [value]="info.email" #email (input)='showEmailCheck()'>
+                            <span (click)='modalEmail(email.value)' *ngIf='saveNewEmail'>✓</span>
+                            <app-modal *ngIf='showModalEmail' (modalRespond)='showModal($event)'></app-modal>
+                        </div>
+                        </div>
+                </div>
+            </div>
+                
+                <div class="fs-24">Project count:{{projectCount>0?projectCount:'none'}}</div>
+                <app-add-project (changeValue)='valueChange($event)'></app-add-project>
+        </div>
+        <app-soft-skills [onEdit]='onEdit'></app-soft-skills>
+    </div>
+  
+<app-experience [onEdit]='onEdit' (changeValue)='valueChange($event)'></app-experience>
+
+</div>

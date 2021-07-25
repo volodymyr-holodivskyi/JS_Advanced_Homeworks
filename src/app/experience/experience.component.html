@@ -1,0 +1,11 @@
+
+<div class="header">Experience</div>
+<div *ngFor="let project of projects;let index=index">
+    <div class="projectHeader">{{project.name}} <span *ngIf='onEdit' (click)='showEditPanel(index)'>✐</span></div>
+    <div>{{project.description}}</div>
+    <div *ngIf='onEdit'>
+         <div *ngIf='project.onEdit'>
+        <app-edit-project (changeValue)='valueChange($event)' [type]='project.type'  [name]="project.name" [description]="project.description" [index]='index'></app-edit-project>
+         </div>
+    </div>   
+</div>

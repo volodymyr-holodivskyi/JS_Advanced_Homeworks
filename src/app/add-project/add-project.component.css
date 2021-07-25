@@ -1,0 +1,17 @@
+form{
+    position: absolute;
+    top: 0;
+    left: 100px;
+}
+button{
+    cursor: pointer;
+    border-radius: 50%;
+    border:none;
+    font-size: 20px;
+}
+.p-relative{
+    position: relative;
+}
+textarea{
+    resize: none;
+}

@@ -1,0 +1,9 @@
+<div class="p-relative">
+    <button (click)="showAddForm()">+</button>
+    <form *ngIf='wannaAdd'>
+        <input type="text" placeholder="Project name" #projectName>
+        <textarea aria-placeholder="Project description"  #projectDescription></textarea>
+        <input type="button" value="Add" (click)='addProject(projectName.value,projectDescription.value)'>
+    </form>
+
+</div>

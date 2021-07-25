@@ -1,0 +1,48 @@
+.logo{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: burlywood;
+    margin: 0 10px;
+}
+.d-flex{
+    display:flex;
+}
+.jc-spc-btw{
+    justify-content: space-between;
+}
+.lh-40{
+    line-height: 60px;
+}
+.fs-24{
+    font-size: 24px;
+}
+.fs-18{
+    font-size: 18px;
+}
+.p-relative{
+    position: relative;
+}
+app-experience{
+    max-width: 50%;
+    padding-top: 100px;
+}
+app-soft-skills{
+    width: 50%;
+}
+.w-50{
+    width: 50%;
+}
+.flex-wrap{
+    flex-wrap: wrap;
+}
+.h-75{
+    height: 75px;
+}
+span{
+    cursor: pointer;
+}
+input[type="text"]{
+    padding: 5px;
+    min-width: 200px;
+}

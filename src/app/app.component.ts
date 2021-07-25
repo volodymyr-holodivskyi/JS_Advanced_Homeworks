@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'cv';
+  changeMode:boolean=false;
+  valueChange(value:boolean){
+    this.changeMode=value;
+  }
 }
