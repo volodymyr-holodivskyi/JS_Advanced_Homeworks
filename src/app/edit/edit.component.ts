@@ -12,11 +12,7 @@ export class EditComponent implements OnInit {
     this.editMode=false;
    }
    changeMode(){
-     if(this.editMode===false){
-       this.editMode=true;
-     }else{
-       this.editMode=false;
-     }
+     this.editMode=!this.editMode;
      this.changeValue.emit(this.editMode);
    }
   ngOnInit(): void {

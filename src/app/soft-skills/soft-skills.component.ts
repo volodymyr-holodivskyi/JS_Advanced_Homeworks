@@ -17,20 +17,13 @@ export class SoftSkillsComponent implements OnInit {
    }
 
    showDesc(index:number){
-     if(this.skills[index].showDescription===true){
-       return this.skills[index].showDescription=false;
-     }
-     return this.skills[index].showDescription=true;
+     this.skills[index].showDescription=!this.skills[index].showDescription;
    }
    
    showEditPanel(index:number){
-    if(this.skills[index].onEdit===false){
-      this.skills[index].onEdit=true;
-      this.skills[index].showCheckmark=false;
-    }else{
-      this.skills[index].onEdit=false;
-      this.skills[index].showCheckmark=false;
-    }
+    this.skills[index].onEdit=!this.skills[index].onEdit;
+    this.skills[index].showCheckmark=false;
+    
    }  
   ngOnInit(): void {
   }

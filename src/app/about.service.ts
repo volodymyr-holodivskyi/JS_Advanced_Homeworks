@@ -1,16 +1,41 @@
 import { Injectable } from '@angular/core';
 
+interface Skill{
+  name:string,
+  description:string,
+  showDescription:boolean,
+  onEdit:boolean,
+  showCheckmark:boolean,
+  type:string
+}
+
+interface Project{
+  name:string,
+  description:string,
+  onEdit:boolean,
+  showCheckmark:boolean,
+  type:string
+}
+
+interface About{
+  firstName:string,
+  lastName:string,
+  email:string,
+  softSkills:Array<Skill>,
+  projects:Array<Project>
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class AboutService {
-  about:any;
+  about:About;
   constructor() {
     this.about={
       firstName:"Volodymyr",
       lastName:'Holodivskyi',
       email:"volodymyrholodivskyi@gmail.com",
-      softSkills:[
+      softSkills: [
         {
           name:"skill1",
           description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, fugit!",
@@ -61,36 +86,37 @@ export class AboutService {
     }
    }
    editName(firstName:string,lastName:string){
-     if(typeof firstName.trim()!==undefined&&typeof lastName.trim()!==undefined){
-       this.about.firstName=firstName;
-       this.about.lastName=lastName;
-     }
+     if(firstName.trim()&&lastName.trim()){
+      return this.about.firstName=firstName,
+              this.about.lastName=lastName;
+     }return false;
    }
    editEmail(email:string){
-     if(typeof email.trim()!==undefined){
-       this.about.email=email;
+     if(email.trim()){
+      return this.about.email=email;
      }
+     return false;
    }
    getProjects(){
-     console.log(this.about.projects);
      return this.about.projects;
    }
    addProject(name:string,description:string){
-    if(typeof name===undefined||typeof description===undefined || name===undefined || description===undefined || name===''|| description===''){
+    if(!name||!description){
      return false;
     }
     else{
-     let newProject={
+     let newProject:Project={
        name:name,
        description:description,
        onEdit:false,
-       showCheckmark:false
+       showCheckmark:false,
+       type:"project"
      }
      return this.about.projects.push(newProject);
     }
   }
   editProject(index:number,name:string,description:string){
-    if(typeof name===undefined||typeof description===undefined || name===undefined || description===undefined || name===''|| description===''||typeof index===undefined){
+    if(!name||!description){
       return false;
      }else{
        this.about.projects[index].name=name;
@@ -108,7 +134,7 @@ export class AboutService {
     return false;
   }
   editSkill(index:number,name:string,description:string){
-    if(typeof name===undefined||typeof description===undefined || name===undefined || description===undefined || name===''|| description===''||typeof index===undefined){
+    if(!name||!description){
       return false;
      }else{
        this.about.softSkills[index].name=name;

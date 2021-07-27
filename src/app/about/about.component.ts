@@ -29,22 +29,12 @@ export class AboutComponent implements OnInit {
   }
   showEditPanel(type:string){
     if(type==='name'){
-      if(this.editName===false){
-        this.editName=true;
-        this.saveNewName=false;
-      }else if(this.editName=true){
-        this.editName=false;
-        this.saveNewName=false;
-      }
+      this.editName=!this.editName;
+      this.saveNewName=false;
     }
     if(type==='email'){
-      if(this.editEmail===false){
-        this.editEmail=true;
-        this.saveNewEmail=false;
-      }else if(this.editEmail=true){
-        this.editEmail=false;
-        this.saveNewEmail=false;
-      }
+      this.editEmail=!this.editEmail;
+      this.saveNewEmail=false;
     }
   }
   showNameCheck(){
@@ -68,27 +58,21 @@ export class AboutComponent implements OnInit {
         this.showModalName=false;
         this.showModalEmail=false;
       }else if(this.showModalName===true){
-        this.changeName(this.firstName,this.lastName)
+        this.changeName(this.firstName,this.lastName);
+        this.showModalName=false;
       }else if(this.showModalEmail===true){
         this.changeEmail(this.email);
+        this.showModalEmail=false;
       }
      }
      modalName(firstName:string,lastName:string){
-      if(this.showModalName===false){
-        this.showModalName=true;
-        this.firstName=firstName;
-        this.lastName=lastName;
-      }else{
-        this.showModalName=false;
-      }
+      this.showModalName=!this.showModalName;
+      this.firstName=firstName;
+      this.lastName=lastName;
      }
      modalEmail(email:string){
-      if(this.showModalEmail===false){
-        this.showModalEmail=true;
-        this.email=email;
-      }else{
-        this.showModalEmail=false;
-      }
+      this.showModalEmail=!this.showModalEmail;
+      this.email=email;
      }
   ngOnInit(): void {
   }

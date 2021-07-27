@@ -20,12 +20,8 @@ export class AddProjectComponent implements OnInit {
     this.service.addProject(name,description);
     this.projectCount=this.service.getSize();
     this.changeValue.emit(this.projectCount);
-    this.wannaAdd=false;
   }
   showAddForm(){
-    if(this.wannaAdd===false){
-     return this.wannaAdd=true;
-    }
-    return this.wannaAdd=false;
+   this.wannaAdd=!this.wannaAdd;
   }
 }

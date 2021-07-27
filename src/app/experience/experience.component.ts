@@ -21,14 +21,8 @@ export class ExperienceComponent implements OnInit {
       this.onEdit=this.component.changeMode;
    }
    showEditPanel(index:number){
-    if(this.projects[index].onEdit===false){
-      
-      this.projects[index].onEdit=true;
-      this.projects[index].showCheckmark=false;
-    }else{
-      this.projects[index].onEdit=false;
-      this.projects[index].showCheckmark=false;
-    }
+    this.projects[index].onEdit=!this.projects[index].onEdit;
+    this.projects[index].showCheckmark=false;
    }
    sendValues(index:number,name:string,description:string){
     this.editor.setValues(index,name,description);

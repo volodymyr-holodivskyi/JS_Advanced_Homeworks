@@ -28,30 +28,17 @@ export class EditProjectComponent implements OnInit {
       this.onEdit=this.component.changeMode;
    }
    showEditPanel(){
-    if(this.onEdit===false){
-      this.onEdit=true;
+    this.onEdit=!this.onEdit;
       this.checkmark=false;
-    }else{
-      this.onEdit=false;
-      this.checkmark=false;
-    }
+    
    }
    showModalEditPanel(projectName:string,projectDescription:string){
-    if(this.showModalEdit===false){
-      this.showModalEdit=true;
-      this.projectName=projectName;
-      this.projectDescription=projectDescription;
-    }else{
-      this.showModalEdit=false;
-    }
+    this.showModalEdit=!this.showModalEdit;
+    this.projectName=projectName;
+    this.projectDescription=projectDescription;
    }
    showModalDeletePanel(){
-    if(this.showModalDelete===false){
-      this.showModalDelete=true;
-
-    }else{
-      this.showModalDelete=false;
-    }
+   this.showModalDelete=!this.showModalDelete;
    }
 
   setValues(index:number,name:string,description:string){
