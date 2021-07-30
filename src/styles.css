@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+.circle{
+    list-style: circle;
+}
+.disc{
+    list-style: disc;
+}
+.square{
+    list-style: square;
+}

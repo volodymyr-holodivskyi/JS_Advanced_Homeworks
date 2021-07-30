@@ -1,0 +1,6 @@
+<div [style.fontSize]='fontSize' [innerHTML]='safeText' [style.fontWeight]='fontWeight' [style.fontStyle]='fontStyle' [style.color]='color' [style.backgroundColor]='backgroundColor'></div>
+<div>
+    <button class="btn btn-primary" (click)='editPanel()'>Edit</button>
+    <button class="btn btn-primary" (click)='stylePanel()'>Style</button>
+</div>
+<app-edit-tools [showEditPanel]='showEditPanel' [showStylePanel]='showStylePanel' (changeText)=changeText($event) (changeFontSize)='changeFontSize($event)' (changeFontWeight)='changeFontWeight($event)' (changeFontStyle)='changeFontStyle($event)' (changeColor)='changeColor($event)' (changeBackgroundColor)='changeBackgroundColor($event)'></app-edit-tools>

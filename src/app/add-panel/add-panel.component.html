@@ -1,0 +1,41 @@
+<div >
+    <form class="container">
+        <h2>Choose what you want to add:</h2>
+        <input type="radio" name="elementType" #table checked value="table" id="table" class="form-check-input" (change)='showAddPanel(table.value)'>
+        <label class="form-check-label" for="table">Table</label>
+        <input type="radio" name="elementType" #list value="list" id="list" class="form-check-input" (change)='showAddPanel(list.value)'>
+        <label class="form-check-label" for="list">List</label>
+        <div *ngIf='showTablePanel' class="tablePanel">
+            <input type="text" #tableRowCount>
+            <input type="text" #tableCellCount>
+            <h4>Table style:</h4>
+            <input type="text" #tableCellWidth>
+            <input type="text" #tableCellHeight>
+
+            <div class="d-flex">
+                <input type="text" #tableBorderWidth>
+                <select #tableBorderType>
+                    <option value="solid" selected>solid</option>
+                    <option value="dashed">dashed</option>
+                    <option value="dotted">dotted</option>
+                </select>
+                <select #tableBorderColor>
+                    <option value="black" selected>black</option>
+                    <option value="red">red</option>
+                    <option value="blue">blue</option>
+                    <option value="green">green</option>
+                </select>
+            </div>
+            <button (click)='addTable(tableRowCount.value,tableCellCount.value,tableCellWidth.value,tableCellHeight.value,tableBorderWidth.value,tableBorderType.value,tableBorderColor.value)'>Create</button>
+        </div>
+        <div *ngIf="showListPanel" class="listPanel">
+            <input type="text" #listElemCount>
+            <select #listStyle>
+                <option value="circle" selected>Circle</option>
+                <option value="disc">Disc</option>
+                <option value="square">Square</option>
+            </select>
+            <button (click)='addList(listElemCount.value,listStyle.value)'>Create</button>
+        </div>
+    </form>
+</div>
