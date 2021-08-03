@@ -1,0 +1,10 @@
+form{
+    width: 80%;
+    margin: 0 auto;
+}
+.borderSetter{
+    width: 60%;
+}
+select{
+    height: initial;
+}

@@ -11,6 +11,10 @@
 button{
     border: none;
 }
+.btn-primary{
+    margin: 0 15px;
+}
+
 .bg-black{
     background-color: black;
 }

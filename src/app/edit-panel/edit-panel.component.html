@@ -1,4 +1,7 @@
 <textarea class="form-control" [value]='text' #editedText></textarea>
-<button class="btn btn-primary" (click)='sendText(editedText.value)'>Save</button>
-<button class="btn btn-primary" (click)='showAddPanel()'>Add</button>
+<div class="d-flex justify-content-center">
+    <button class="btn btn-primary" (click)='sendText(editedText.value)'>Save</button>
+    <button class="btn btn-primary" (click)='showAddPanel()'>Add</button>
+</div>
+
 <app-add-panel *ngIf='addPanel' class="addPanel" (showPanel)='showPanel($event)' (createList)='addList($event)' (createTable)='addTable($event)' ></app-add-panel>

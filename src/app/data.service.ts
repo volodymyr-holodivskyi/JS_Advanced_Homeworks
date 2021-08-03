@@ -8,7 +8,9 @@ export class DataService {
   fontSize:string='16px';
   fontWeight:string='normal';
   fontStyle:string='normal';
+  fontFamily:string='Times New Roman';
   color:string='black';
+  fonts:string[]=['Times New Roman','Arial','Helvetica','Verdana','Tahoma','Courier'];
   backgroundColor:string='white';
   constructor() { }
 
@@ -23,6 +25,9 @@ export class DataService {
   }
   changeBackgroundColor(value:string){
     return this.backgroundColor=value;
+  }
+  changeFontFamily(value:string){
+    return this.fontFamily=value;
   }
   changeFontWeight(value:boolean){
     if(value===true){
@@ -40,7 +45,7 @@ export class DataService {
   }
   addList(elemCount:number,listStyle:string){
     if(typeof elemCount!==undefined){
-      let list=`<ul style="list-style-type:${listStyle}" [style.list-style-type]='${listStyle}'>`;
+      let list=`<ul style="list-style-type:${listStyle}"'>`;
       for(let i=0;i<elemCount;i++){
         list+=`<li>Item№ ${i+1}</li>`;
       }
@@ -55,7 +60,7 @@ export class DataService {
       for(let i=0;i<rowCount;i++){
         let row=`<tr>`;
         for(let j=0;j<cellCount;j++){
-          row+= `<td style="width:${cellWidth}px;height:${cellHeight}px;border:${borderWidth}px ${borderType} ${borderColor}">Row:${i+1} Cell:${j+1}</td>`;
+          row+= `<td style="width:${cellWidth}px;height:${cellHeight}px;border:${borderWidth}px ${borderType} ${borderColor}">R:${i+1} C:${j+1}</td>`;
         }
         row+='</tr>'
         table+=row;

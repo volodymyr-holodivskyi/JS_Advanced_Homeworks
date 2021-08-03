@@ -14,8 +14,10 @@ export class StylePanelComponent implements OnInit {
   @Output() changeFontStyle = new EventEmitter<string>();
   @Output() changeColor = new EventEmitter<string>();
   @Output() changeBackgroundColor = new EventEmitter<string>();
+  @Output() changeFontFamily= new EventEmitter<string>();
   showColorPanel:boolean=false;
   showBGColorPanel:boolean=false;
+  fonts:string[]=this.service.fonts;
   constructor(private service: DataService) { }
   sendFontSize(value:any){
     this.service.changeFontSize(value);
@@ -34,6 +36,10 @@ export class StylePanelComponent implements OnInit {
   sendBackgroundColor(value:any){
     this.service.changeBackgroundColor(value);
     this.changeBackgroundColor.emit(value);
+  }
+  sendFontFamily(value:any){
+    this.service.changeFontFamily(value);
+    this.changeFontFamily.emit(value);
   }
   colorPanel(){
     this.showColorPanel=!this.showColorPanel;

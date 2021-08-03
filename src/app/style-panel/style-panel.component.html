@@ -1,67 +1,95 @@
 <div class="container">
     <form >
-        <input type="radio" name="fontSize" #fs12 value="12px" id="fs12" class="form-check-input" (change)='sendFontSize(fs12.value)'>
-        <label class="form-check-label" for="fs12">12px</label>
-        <input type="radio" name="fontSize" #fs14 value="14px" id="fs14" class="form-check-input" (change)='sendFontSize(fs14.value)'>
-        <label class="form-check-label" for="fs14">14px</label>
-        <input type="radio" name="fontSize" #fs16 value="16px" id="fs16" class="form-check-input" (change)='sendFontSize(fs16.value)'>
-        <label class="form-check-label" for="fs16">16px</label>
-        <input type="radio" name="fontSize" #fs18 value="18px" id="fs18" class="form-check-input" (change)='sendFontSize(fs18.value)'>
-        <label class="form-check-label" for="fs18">18px</label>
-        <input type="radio" name="fontSize" #fs20 value="20px" id="fs20" class="form-check-input" (change)='sendFontSize(fs20.value)'>
-        <label class="form-check-label" for="fs20">20px</label>
-        <input type="radio" name="fontSize" #fs22 value="22px" id="fs22" class="form-check-input" (change)='sendFontSize(fs22.value)'>
-        <label class="form-check-label" for="fs22">22px</label>
-       <div class="container d-flex">
+        <div class="d-flex mb-3">
+            <div class="mx-1">
+                <input type="radio" name="fontSize" #fs12 value="12px" id="fs12" class="form-check-input" (change)='sendFontSize(fs12.value)'>
+                <label class="form-check-label" for="fs12">12px</label>
+            </div>
+            <div class="mx-1">
+                <input type="radio" name="fontSize" #fs14 value="14px" id="fs14" class="form-check-input" (change)='sendFontSize(fs14.value)'>
+                <label class="form-check-label" for="fs14">14px</label>
+            </div>
+            <div class="mx-1">
+                <input type="radio" name="fontSize" #fs16 value="16px" id="fs16" class="form-check-input" (change)='sendFontSize(fs16.value)'>
+                <label class="form-check-label" for="fs16">16px</label>
+            </div>
+            <div class="mx-1">
+                <input type="radio" name="fontSize" #fs18 value="18px" id="fs18" class="form-check-input" (change)='sendFontSize(fs18.value)'>
+                <label class="form-check-label" for="fs18">18px</label>
+            </div>
+            <div class="mx-1">
+                <input type="radio" name="fontSize" #fs20 value="20px" id="fs20" class="form-check-input" (change)='sendFontSize(fs20.value)'>
+                <label class="form-check-label" for="fs20">20px</label>
+            </div>
+            <div class="mx-1">
+                <input type="radio" name="fontSize" #fs22 value="22px" id="fs22" class="form-check-input" (change)='sendFontSize(fs22.value)'>
+                <label class="form-check-label" for="fs22">22px</label>
+            </div>  
+        </div>
+        
+        <div>
+            <select #fontFamily class="form-control" (change)='sendFontFamily(fontFamily.value)'>
+                <option *ngFor="let font of fonts" [value]='font'>
+                    {{font}}
+                </option>
+            </select>
+        </div>
+       <div class="container d-flex justify-content-center">
         <div>
             <button class="btn btn-primary" (click)='colorPanel()'>Color</button>
-            <div *ngIf="showColorPanel">
-               <div class="row">
-                    <button class="block bg-black" value='black' #black (click)='sendColor(black.value)'></button>
-                    <button class="block bg-white" value='white' #white (click)='sendColor(white.value)'></button>
-                    <button class="block bg-yellow" value='rgb(224, 224, 12)' #yellow (click)='sendColor(yellow.value)'></button>
-               </div>
-                <div class="row">
-                    <button class="block bg-red" value='red' #red (click)='sendColor(red.value)'></button>
-                    <button class="block bg-blue" value='blue' #blue (click)='sendColor(blue.value)'></button>
-                    <button class="block bg-green" value='green' #green (click)='sendColor(green.value)'></button>
-                </div>
-                <div class="row">
-                    <button class="block bg-violet" value='violet' #violet (click)='sendColor(violet.value)'></button>
-                    <button class="block bg-teal" value='teal' #teal (click)='sendColor(teal.value)'></button>
-                    <button class="block bg-orange" value='orange' #orange (click)='sendColor(orange.value)'></button>
-                </div>
-            </div>
+          
         </div>
         <div>
             <button class="btn btn-primary" (click)='backgroundColorPanel()'>Background Color</button>
-            <div *ngIf="showBGColorPanel">
-               <div class="row">
-                    <button class="block bg-black" value='black' #black (click)='sendBackgroundColor(black.value)'></button>
-                    <button class="block bg-white" value='white' #white (click)='sendBackgroundColor(white.value)'></button>
-                    <button class="block bg-yellow" value='rgb(224, 224, 12)' #yellow (click)='sendBackgroundColor(yellow.value)'></button>
-               </div>
-                <div class="row">
-                    <button class="block bg-red" value='red' #red (click)='sendBackgroundColor(red.value)'></button>
-                    <button class="block bg-blue" value='blue' #blue (click)='sendBackgroundColor(blue.value)'></button>
-                    <button class="block bg-green" value='green' #green (click)='sendBackgroundColor(green.value)'></button>
-                </div>
-                <div class="row">
-                    <button class="block bg-violet" value='violet' #violet (click)='sendBackgroundColor(violet.value)'></button>
-                    <button class="block bg-teal" value='teal' #teal (click)='sendBackgroundColor(teal.value)'></button>
-                    <button class="block bg-orange" value='orange' #orange (click)='sendBackgroundColor(orange.value)'></button>
-                </div>
-            </div>
         </div>
        </div>
+       <div class="d-flex justify-content-center">
+        <div *ngIf="showColorPanel">
+            <div class="row">
+                 <button class="block bg-black" value='black' #black (click)='sendColor(black.value)'></button>
+                 <button class="block bg-white" value='white' #white (click)='sendColor(white.value)'></button>
+                 <button class="block bg-yellow" value='rgb(224, 224, 12)' #yellow (click)='sendColor(yellow.value)'></button>
+            </div>
+             <div class="row">
+                 <button class="block bg-red" value='red' #red (click)='sendColor(red.value)'></button>
+                 <button class="block bg-blue" value='blue' #blue (click)='sendColor(blue.value)'></button>
+                 <button class="block bg-green" value='green' #green (click)='sendColor(green.value)'></button>
+             </div>
+             <div class="row">
+                 <button class="block bg-violet" value='violet' #violet (click)='sendColor(violet.value)'></button>
+                 <button class="block bg-teal" value='teal' #teal (click)='sendColor(teal.value)'></button>
+                 <button class="block bg-orange" value='orange' #orange (click)='sendColor(orange.value)'></button>
+             </div>
+         </div>
+       </div>
+     
+     <div class="d-flex justify-content-center">
+        <div *ngIf="showBGColorPanel">
+            <div class="row">
+                 <button class="block bg-black" value='black' #black (click)='sendBackgroundColor(black.value)'></button>
+                 <button class="block bg-white" value='white' #white (click)='sendBackgroundColor(white.value)'></button>
+                 <button class="block bg-yellow" value='rgb(224, 224, 12)' #yellow (click)='sendBackgroundColor(yellow.value)'></button>
+            </div>
+             <div class="row">
+                 <button class="block bg-red" value='red' #red (click)='sendBackgroundColor(red.value)'></button>
+                 <button class="block bg-blue" value='blue' #blue (click)='sendBackgroundColor(blue.value)'></button>
+                 <button class="block bg-green" value='green' #green (click)='sendBackgroundColor(green.value)'></button>
+             </div>
+             <div class="row">
+                 <button class="block bg-violet" value='violet' #violet (click)='sendBackgroundColor(violet.value)'></button>
+                 <button class="block bg-teal" value='teal' #teal (click)='sendBackgroundColor(teal.value)'></button>
+                 <button class="block bg-orange" value='orange' #orange (click)='sendBackgroundColor(orange.value)'></button>
+             </div>
+         </div>
+     </div>
         
         
         <div class="d-flex">
-            <div class="form-check">
+            <div class="form-check  mx-1">
                 <input class="form-check-input" type="checkbox" #weight id="fontWeight" (change)='sendFontWeight(weight.checked)'>
                 <label class="form-check-label" for="fontWeight">Bold Text</label>
             </div>
-            <div class="form-check">
+            <div class="form-check mx-1">
                 <input class="form-check-input" type="checkbox" #style id="fontStyle" (change)='sendFontStyle(style.checked)'>
                 <label class="form-check-label" for="fontStyle">Italic Text</label>
             </div>

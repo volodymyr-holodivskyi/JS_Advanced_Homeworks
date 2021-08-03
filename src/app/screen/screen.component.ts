@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { ThisReceiver } from '@angular/compiler';
+import { Component, OnInit,ViewChild,ElementRef,AfterViewInit } from '@angular/core';
 
 import { DataService } from '../data.service';
 
@@ -9,26 +9,30 @@ import { DataService } from '../data.service';
   styleUrls: ['./screen.component.css']
 })
 export class ScreenComponent implements OnInit {
+  @ViewChild('textContent') textContent: ElementRef;
+
   text:string;
   fontSize:string;
   fontWeight:string;
   fontStyle:string;
+  fontFamily:string;
   color:string;
   safeText:any;
   backgroundColor:string;
   showEditPanel:boolean=false;
   showStylePanel:boolean=false;
-  constructor(private service:DataService,private sanitizer:DomSanitizer) {
+  constructor(private service:DataService,private elementRef:ElementRef) {
+    this.textContent=this.elementRef.nativeElement.querySelector('.textContent');
     this.text=this.service.text;
-    this.safeText=sanitizer.bypassSecurityTrustHtml(this.text);
     this.fontSize=this.service.fontSize;
     this.fontWeight=this.service.fontWeight;
     this.fontStyle=this.service.fontStyle;
+    this.fontFamily=this.service.fontFamily;
     this.color=this.service.color;
     this.backgroundColor=this.service.backgroundColor;
    }
    changeText(text:any){
-     this.safeText=text;
+    this.textContent.nativeElement.innerHTML=text;
    }
    changeFontSize(value:any){
      this.fontSize=value;
@@ -38,6 +42,9 @@ export class ScreenComponent implements OnInit {
    }
    changeFontStyle(value:any){
      this.fontStyle=value;
+   }
+   changeFontFamily(value:any){
+     this.fontFamily=value;
    }
    changeColor(value:any){
      this.color=value;
@@ -56,5 +63,7 @@ export class ScreenComponent implements OnInit {
    }
   ngOnInit(): void {
   }
-
+  ngAfterViewInit(){
+    this.textContent.nativeElement.innerHTML=this.text;
+  }
 }

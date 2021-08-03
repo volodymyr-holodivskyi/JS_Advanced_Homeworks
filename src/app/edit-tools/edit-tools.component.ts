@@ -16,12 +16,14 @@ export class EditToolsComponent implements OnInit {
   @Input() fontStyle:string;
   @Input() color:string;
   @Input() backgroundColor:string;
+  @Input() fontFamily:string;
   @Output() changeFontSize = new EventEmitter<string>();
   @Output() changeText = new EventEmitter<string>();
   @Output() changeFontWeight = new EventEmitter<string>();
   @Output() changeFontStyle = new EventEmitter<string>();
   @Output() changeColor = new EventEmitter<string>();
   @Output() changeBackgroundColor = new EventEmitter<string>();
+  @Output() changeFontFamily = new EventEmitter<string>();
   constructor(private service:DataService) { 
     this.text=this.service.text;
     this.fontSize=this.service.fontSize;
@@ -29,6 +31,7 @@ export class EditToolsComponent implements OnInit {
     this.fontStyle=this.service.fontStyle;
     this.color=this.service.color;
     this.backgroundColor=this.service.backgroundColor;
+    this.fontFamily=this.service.fontFamily;
   }
 
   weightChange(value:any){
@@ -50,6 +53,10 @@ export class EditToolsComponent implements OnInit {
   colorChange(value:any){
     this.color=value;
     this.changeColor.emit(value);
+  }
+  familyChange(value:any){
+    this.fontFamily=value;
+    this.changeFontFamily.emit(value);
   }
   backgroundColorChange(value:any){
     this.backgroundColor=value;
