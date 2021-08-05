@@ -1,0 +1,145 @@
+<div class="container">
+    <form>
+        <div class="header">Що додамо?</div>
+        <div class="relative add-con">
+            <div class="swap-btns">
+                <button class="swapBtn" [class.selectedBtn]='showTablePanel' (click)='showAddPanel("table")'>Таблиця</button>
+                <button class="swapBtn" [class.selectedBtn]='showListPanel' (click)='showAddPanel("list")'>Список</button>
+            </div>
+            <div *ngIf='showTablePanel' class="tablePanel">
+                <div class="row justify-content-center align-items-center block wh">
+                    <div class="mb-3 row">
+                        <label for="tableCellWidth" class="col-sm-2 col-form-label">Ширина</label>
+                        <div class="col-sm-5">
+                            <div class="error" *ngIf="tableCellWidth.invalid&&tableCellWidth.dirty">Введіть число в діапазоні від 1 до 99</div>
+                            <input type="text" autocomplete="off" id="tableCellWidth" name="cellWidth" [(ngModel)]="settings.cellWidth" #tableCellWidth='ngModel' class="form-control" required pattern="[1-9]\d?">
+                        </div>                
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="tableCellHeight" class="col-sm-2 col-form-label">Висота</label>
+                        <div class="col-sm-5">
+                            <div class="error" *ngIf="tableCellHeight.invalid&&tableCellHeight.dirty">Введіть число в діапазоні від 1 до 99</div>
+                            <input type="text" autocomplete="off" id="tableRowCount" name="cellHeight" [(ngModel)]="settings.cellHeight" #tableCellHeight='ngModel' class="form-control" required pattern="[1-9]\d?">
+                        </div>                
+                    </div>
+                   </div>
+                   <div class="mb-3 row justify-content-center align-items-center block bs">
+                   <div class="row">
+                        <label for="tableBorderWidth" class="col-form-label">Товщина</label>
+                    <div class="mx-05 col-sm-5">
+                        <div class="error" *ngIf="tableBorderWidth.invalid&&tableBorderWidth.dirty">Введіть число в діапазоні від 1 до 99</div>
+                        <input type="text" autocomplete="off" class="col-sm-3" name="borderWidth" [(ngModel)]="settings.borderWidth" #tableBorderWidth='ngModel' id="tableBorderWidth" required pattern="[1-9]\d?"> 
+                    </div>
+                   </div>
+                   
+                    <div class="row mx-05">
+                        <div class="mx-05">Тип лінії</div>
+                        <select name="borderType" [(ngModel)]="settings.borderType" #tableBorderType='ngModel' class="col-sm-3" >
+                            <option value="solid" selected>Суцільна</option>
+                            <option value="dashed">Пунктирна</option>
+                            <option value="dotted">Точкова</option>
+                        </select>
+                    </div>
+                   
+                    <div class="row mx-05">
+                        <div class="mx-05">Колір</div>
+                        <input type="color" name="borderColor" [(ngModel)]="settings.borderColor" #tableBorderColor='ngModel' >
+                    </div>
+                </div>
+               <div class="row justify-content-center align-items-center block cs">
+                <div class="mb-3 row">
+                    <label for="tableRowCount" class="col-sm-2 col-form-label">Кількість рядків</label>
+                    <div class="col-sm-5">
+                        <div class="error" *ngIf="tableRowCount.invalid&&tableRowCount.dirty">Введіть число в діапазоні від 1 до 99</div>
+                        <input type="text" autocomplete="off" id="tableRowCount" name="rowCount" [(ngModel)]="settings.rowCount"  #tableRowCount='ngModel' class="form-control" required pattern="[1-9]\d?">
+                    </div>                
+                </div>
+                <div class="mb-3 row">
+                    <label for="tableCellCount" class="col-sm-2 col-form-label">Кількість стовпців</label>
+                    <div class="col-sm-5">
+                        <div class="error" *ngIf="tableCellCount.invalid&&tableCellCount.dirty">Введіть число в діапазоні від 1 до 99</div>
+                        <input type="text" autocomplete="off" id="tableCellCount" name="cellCount" [(ngModel)]="settings.cellCount" #tableCellCount='ngModel' class="form-control" required pattern="[1-9]\d?">
+                    </div>                
+                </div>
+               </div> 
+             
+              <div class="row justify-content-center">
+                <button class="btn" *ngIf="tableRowCount.valid&&tableCellCount.valid&&tableCellWidth.valid&&tableCellHeight.valid&&tableBorderWidth.valid" (click)='addTable(tableRowCount.value,tableCellCount.value,tableCellWidth.value,tableCellHeight.value,tableBorderWidth.value,tableBorderType.value,tableBorderColor.value)'>Create</button>
+              </div>
+            </div>
+            <div *ngIf="showListPanel" class="listPanel">
+                <div class="row justify-content-center block lt">
+                    <div>
+                        <input type="radio" name="listType" #ol id="ol" value="ol" (change)='showListType(ol.value)'>
+                        <label for="ol">Нумерований</label>
+                    </div>
+                    <div>
+                        <input type="radio"  name="listType" #ul id="ul" value="ul" (change)='showListType(ul.value)'>
+                        <label for="ul">Маркований</label>
+                    </div>
+                </div>
+                <div *ngIf="showMarkedList" class="block ls">
+                    <div class="row justify-content-center ">
+                        <div class="mb-3 row">
+                            <label for="listElemCount" class="col-sm-2 col-form-label">Кількість елементів</label>
+                            <div class="col-sm-5">
+                                <div class="error" *ngIf="listElemCount.invalid&&listElemCount.dirty">Введіть число в діапазоні від 1 до 99</div>
+                                <input type="text" name="listElemCount" [(ngModel)]="List.elemCount" #listElemCount='ngModel' id="listElemCount" class="form-control" required pattern="[1-9]\d?">
+                            </div>  
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="listStyle" class="col-sm-2 col-form-label">Тип маркування</label>
+                            <select [(ngModel)]="List.markType" #listStyle='ngModel' name="listStyle" id="listStyle" class="col-sm-5" >
+                                <option value="circle" selected>Circle</option>
+                                <option value="disc">Disc</option>
+                                <option value="square">Square</option>
+                            </select>
+                        </div>
+                    </div>
+                  <div *ngIf="listElemCount.valid" class="row justify-content-center">
+                    <button class="btn btn-secondary" (click)='addList(listType,listElemCount.value,listStyle.value)'>Create</button>
+                  </div> 
+                </div>
+                <div *ngIf="showNumericList" class="block ls">
+                    <div class="row justify-content-center">
+                        <div class="mb-3 row">
+                            <label for="listElemCount" class="col-sm-2 col-form-label">Кількість елементів</label>
+                            <div class="col-sm-5">
+                                <div class="error" *ngIf="listElemCount.invalid&&listElemCount.dirty">Введіть число в діапазоні від 1 до 99</div>
+                                <input type="text" name="listElemCount" [(ngModel)]="List.elemCount" #listElemCount='ngModel' id="listElemCount" class="form-control" required pattern="[1-9]\d?">
+                            </div>  
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="listStyle" class="col-sm-2 col-form-label">Тип маркування</label>
+                            <select [(ngModel)]="List.markType" #listStyle='ngModel' name="listStyle" id="listStyle" class="col-sm-5">
+                                <option value="decimal" selected>Арабські числа</option>
+                                <option value="upper-roman">Римські числа</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <button *ngIf="listElemCount.valid" class="btn btn-secondary" (click)='addList(listType,listElemCount.value,listStyle.value)'>Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <div class="con relative row justify-content-center">
+           <button class="btn abs" (click)='exampleShow(showTablePanel)'>Подивитися на приклад</button>
+           <div class="screen" *ngIf="showExampleScreen">
+            <div class="screen-panel">
+                <button class="btn close-btn" (click)='exampleHide()'></button>
+            </div>
+            <div [hidden]='showExample' class="screen-display example" #example>
+            </div>
+           </div>
+           <div *ngIf="!showExampleScreen">
+            <div class="row justify-content-center">
+                <fa-icon class="icon" [icon]='faDesktop'></fa-icon>
+            </div>
+            <div class="iconDesc" (click)='exampleHide()'>Показати приклад</div>
+           </div>
+       </div>
+        
+        
+    </form>
+</div>

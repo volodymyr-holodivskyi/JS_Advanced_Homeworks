@@ -27,6 +27,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/@fortawesome/css/all.css",
               "src/styles.css"
             ],
             "scripts": []

@@ -1,0 +1,89 @@
+.container{
+    background-color: rgb(66, 68, 70);
+    padding: 15px;
+    border-radius: 5px;
+    width: 95%;
+    margin: 0 auto;
+    min-height: 40vh;
+}
+.block{
+    margin: 15px auto;
+    width: 90%;
+    border: 2px dotted rgb(177, 176, 176);
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    background-color: rgb(66, 68, 70);
+    position: relative;
+}
+button{
+    border: none;
+}
+.btn-primary{
+    margin: 0 15px;
+}
+
+.bg-black{
+    background-color: black;
+}
+.bg-white{
+    background-color: white;
+}
+.bg-yellow{
+    background-color: rgb(224, 224, 12);
+}
+.bg-red{
+    background-color: red;
+}
+.bg-blue{
+    background-color: blue;
+}
+.bg-green{
+    background-color: green;
+}
+.bg-violet{
+    background-color: violet;
+}
+.bg-teal{
+    background-color: teal;
+}
+.bg-orange{
+    background-color: orange;
+}
+.row{
+    display: flex;
+}
+.justify-content-center{
+    justify-content: center;
+}
+.fs::before,.ff::before,.cp::before,.ts::before{
+    position: absolute;
+    font-size: 16px;
+    color: white;
+    top: -10px;
+    left: 20px;
+    padding: 0 2px;
+    background-color: rgb(66, 68, 70);
+}
+.fs::before{
+    content: 'Розмір шрифта';
+}
+.ff::before{
+    content: 'Шрифт';
+}
+.cp::before{
+    content: 'Колір';
+}
+.ts::before{
+    content: 'Стиль тексту';
+}
+.mx-1{
+    margin: 0 1rem;
+}
+.mx-05{
+    margin: 0 0.5rem;
+}
+input[type='color']{
+    width: 40px;
+    height: 40px;
+}

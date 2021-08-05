@@ -1,0 +1,179 @@
+form{
+    width: 80%;
+    margin: 0 auto;
+}
+.container{
+    background-color: rgb(66, 68, 70);
+    padding: 15px;
+    border-radius: 5px;
+    width: 95%;
+    margin: 0 auto;
+    min-height: 50vh;
+}
+.ng-invalid:not(form).ng-touched.ng-dirty{
+    border: 2px solid red;
+
+}
+.ng-valid:not(form).ng-touched.ng-dirty{
+    border: 2px solid green;
+}
+.row{
+    display: flex;
+}
+.align-items-center{
+    align-items: center;
+}
+.col-sm-5{
+    position: relative;
+}
+.tablePanel,.listPanel{
+    padding: 30px;
+    margin: 0 auto;
+}
+.error{
+    position: absolute;
+    text-align: center;
+    top: -250%;
+    padding: 3px;
+    font-size: 12px;
+    background-color: crimson;
+    border-radius: 5px;
+    width: 100px;
+}
+.justify-content-center{
+    justify-content: center;
+}
+.block{
+    margin: 15px auto;
+    width: 90%;
+    border: 2px dotted rgb(177, 176, 176);
+    border-radius: 5px;
+    padding: 10px;
+    background-color: rgb(66, 68, 70);
+    color: white;
+    position: relative;
+}
+.wh::before,.bs::before,.cs::before,.lt::before,.ls::before{
+    position: absolute;
+    font-size: 16px;
+    color: white;
+    top: -10px;
+    left: 20px;
+    padding: 0 2px;
+    background-color: rgb(66, 68, 70);
+}
+.wh::before{
+    content: 'Ширина і висота комірки таблиці';
+}
+.bs::before{
+    content: 'Товщина,колір і тип ліній таблиці';
+}
+.cs::before{
+    content: 'Кількість рядків і стовпців';
+}
+.lt::before{
+    content: 'Тип списку';
+}
+.ls::before{
+    content: 'Параметри списку';
+}
+.btn{
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: wheat;
+    background-color: tomato;
+    border: none;
+    box-shadow: 0 0 5px 0 black;
+}
+.header{
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    padding: 20px 0;
+}
+input[type='text']{
+    width: 100px;
+}
+label{
+    margin: 0 5px;
+}
+.mx-05{
+    margin: 0 0.5rem;
+}
+.mx-01{
+    margin: 0 0.1rem;
+}
+.relative{
+    position: relative;
+}
+.add-con{
+    border: 2px solid gray;
+    border-radius: 5px;
+}
+.swap-btns{
+    position: absolute;
+    top: -30px;
+    left: 20px;
+}
+.swapBtn{
+    color: white;
+    padding: 5px;
+    height: 25px;
+    background-color: rgb(66, 68, 70);
+    border: 2px solid gray;
+    transform: skewX(340deg);
+    border-bottom: none;
+    z-index: 2;
+    cursor: pointer;
+}
+.selectedBtn{
+   padding: 10px;
+   height: 30px;
+}
+.abs{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.screen{
+    width: 300px;
+    height: 200px;
+    border-radius: 8px;
+    background-color: rgb(112, 114, 128);
+}
+.con{
+    margin: 15px 0;
+    width: 100%;
+}
+.screen-panel{
+    height: 10%;
+    background-color: chocolate;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.close-btn{
+    border-radius: 50%;
+    padding: 0;
+    width: 15px;
+    height: 15px;
+    margin-right: 3px;
+}
+.icon{
+    font-size: 100px;
+    
+}
+.icon:hover,.iconDesc:hover{
+    color: rgb(54, 54, 54);
+}
+.iconDesc{
+    font-size: 24px;
+    cursor: pointer;
+}
+.btn-secondary{
+    margin: 15px 0;
+}

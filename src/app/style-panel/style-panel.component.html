@@ -1,0 +1,45 @@
+<div class="container">
+    <form >
+        <div class="row mb-3 justify-content-center fs block">
+            <div class="mx-1" *ngFor="let item of fontSizes">
+                <input type="radio" name="fontSize" #fsitem value={{item}}px id=fs{{item}} (change)='sendFontSize(fsitem.value)'>
+                <label for=fs{{item}}>{{item}} px</label>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center block ff">
+            <select #fontFamily class="form-control" (change)='sendFontFamily(fontFamily.value)'>
+                <option *ngFor="let font of fonts" [value]='font'>
+                    {{font}}
+                </option>
+            </select>
+        </div>
+     <div class="row justify-content-center block cp">
+        <div class="mx-1 row">
+            <div class="mx-05">Background</div>
+            <input type="color" name="bgColor" [(ngModel)]="backgroundColor" #bgColor='ngModel' value='backgroundColor' (change)='sendBackgroundColor(bgColor.value)'> 
+        </div>
+         <div class="mx-1 row">
+             <div class="mx-05">Text</div>
+            <input type="color" name="color" [(ngModel)]="textColor" #color='ngModel' [value]='textColor' (change)='sendColor(color.value)'> 
+         </div>
+       
+     </div>
+        
+        
+        <div class="row justify-content-center block ts">
+            <div class="form-check  mx-1">
+                <input class="form-check-input" type="checkbox" #weight id="fontWeight" (change)='sendFontWeight(weight.checked)'>
+                <label class="form-check-label" for="fontWeight">Bold Text</label>
+            </div>
+            <div class="form-check mx-1">
+                <input class="form-check-input" type="checkbox" #style id="fontStyle" (change)='sendFontStyle(style.checked)'>
+                <label class="form-check-label" for="fontStyle">Italic Text</label>
+            </div>
+            <div class="form-check mx-1">
+                <input class="form-check-input" type="checkbox" #decoration id="textDecoration" (change)='sendTextDecoration(decoration.checked)'>
+                <label class="form-check-label" for="textDecoration">Text decoration</label>
+            </div>
+        </div>
+    </form>
+</div>
