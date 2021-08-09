@@ -1,0 +1,13 @@
+<div class="">
+    <div class="form-floating mb-3">
+        <input type="text" id="postTheme" [(ngModel)]="post.theme" #postTheme='ngModel' class="form-control" placeholder="Post theme" autocomplete="off" required>
+        <label for="postTheme">Post theme</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="text" id="postText" [(ngModel)]="post.text" #postText='ngModel' class="form-control" placeholder="Post text" autocomplete="off" required>
+        <label for="postText">Post text</label>
+    </div>
+    <div>
+        <button *ngIf='postTheme.valid&&postText.valid' class="btn btn-primary" (click)='addPost()'>Post</button>
+    </div>
+</div>

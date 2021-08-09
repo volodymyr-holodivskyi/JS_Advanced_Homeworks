@@ -1,0 +1,32 @@
+<div class="d-flex justify-content-between">
+    <app-add-post *ngIf="!showEditPanel" class="col-md-3" (addedPost)='addedPost($event)' ></app-add-post>
+    <app-edit-post *ngIf="showEditPanel" class="col-md-3" [index]='editIndex' (editedPost)='editedPost($event)'></app-edit-post>
+    <div ><button class="btn btn-danger mx-1" *ngIf="onAdminMode" (click)='modalRemoveAll()' [disabled]='showEditPanel'>Remove all posts</button></div>
+</div>
+<div *ngFor="let post of posts;let i=index" class="mt-5 col-md-5">
+    <h3>{{post.theme}}</h3>
+    <div class="mb-3">
+        {{post.text}}
+    </div>
+    <div class="row">
+        <div class="col-md-8">Posted at: {{post.date}}</div>
+        <div class="col-md-4">Posted by: {{post.author}}</div>
+    </div>
+    
+    <div class="d-flex justify-content-between">
+        <button class="btn btn-secondary" *ngIf="(post.author===currentUser.firstName+' '+currentUser.lastName)||currentUser.login==='admin'" (click)="editPanel(i)" [disabled]='showEditPanel'>Edit</button>
+        <button *ngIf="onAdminMode" class="btn btn-secondary" (click)='removePost(i)' [disabled]='showEditPanel'>Delete</button>
+    </div>
+</div>
+<div *ngIf="showModalRemoveAll" class="modal-con">
+    <div class="my-modal">
+        <div class="text-center fs-3 mb-3">
+            Are you really want to remove all posts?
+        </div>
+        <div class="d-flex justify-content-around">
+            <button class="btn" (click)='processModalRemoveAll(true)'>✓</button>
+            <button class="btn" (click)='processModalRemoveAll(false)'>✖</button>
+        </div>
+        
+    </div>
+</div>

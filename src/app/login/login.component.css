@@ -1,0 +1,41 @@
+.con{
+    width: 100vw;
+    height: 100vh;
+    background-color:rgba(0, 0, 0, 0.267);
+}
+.login-window{
+    padding: 25px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 5px 0 black;
+}
+input{
+    min-width: 300px;
+}
+.text-center{
+    color: cornflowerblue;
+}
+header{
+    padding: 10px;
+    background-color: darkseagreen;
+    min-height: 50px;
+}
+.modal-con{
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:rgba(0, 0, 0, 0.521);
+}
+.my-modal{
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px 0 black;
+    z-index: 3;
+}

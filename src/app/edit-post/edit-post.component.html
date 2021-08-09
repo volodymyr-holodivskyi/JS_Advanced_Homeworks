@@ -1,0 +1,13 @@
+<div class="">
+    <div class="form-floating mb-3">
+        <input type="text" id="postTheme" #postTheme [value]='Epost.theme' class="form-control" placeholder="Post theme" required (input)='checkValidity(postTheme.value)'>
+        <label for="postTheme">Post theme</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="text" id="postText"  #postText [value]='Epost.text' class="form-control" placeholder="Post text" required (input)='checkValidity(postText.value)'>
+        <label for="postText">Post text</label>
+    </div>
+    <div>
+        <button *ngIf='checkValidity(postTheme.value)&&checkValidity(postText.value)' class="btn btn-primary" (click)='editPost(postTheme.value,postText.value)'>Edit</button>
+    </div>
+</div>

@@ -1,0 +1,98 @@
+<div class="con d-flex justify-content-center align-items-center" [class.bigger-con]='invalidFieldCount()>4'>
+    <form class="register-window">
+        <div>
+            <div class="text-center fs-3 mb-3">
+                Register
+            </div>
+            <div class="mb-3">
+                <div class="form-floating ">
+                <input type="text" name="firstName" [(ngModel)]="user.firstName" aria-describedby="firstNameHelp" #firstName='ngModel' id="firstName" class="form-control" autocomplete="off" placeholder="First name" required pattern="[a-zA-z]+">
+                <label for="firstName">First name</label>
+                <div *ngIf="formValid.firstName" class="form-text" id="firstNameHelp">
+                    First name must begin with a capital letter, use only latin symbols.
+                </div>
+            </div>
+                <div *ngIf="!formValid.firstName" class="alert alert-danger">
+                    Incorect first name
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-floating ">
+                    <input type="text" name="lastName" [(ngModel)]="user.lastName" aria-describedby="lastNameHelp" #lastName='ngModel' id="lastName" class="form-control" autocomplete="off" placeholder="Last name" required pattern="[a-zA-z]+">
+                    <label for="lastName">Last name</label>
+                    <div *ngIf="formValid.lastName" class="form-text" id="lastNameHelp">
+                        Last name must begin with a capital letter, use only latin symbols.
+                    </div>
+                </div>
+                <div *ngIf="!formValid.lastName" class="alert alert-danger">
+                    Incorect last name
+                </div>
+            </div>
+           <div class="mb-3">
+            <div class="form-floating">
+                <input type="text" name="login" [(ngModel)]="user.login" aria-describedby="loginHelp" #login='ngModel' id="login" class="form-control" autocomplete="off" placeholder="Login" required pattern="[a-zA-z]+">
+                <label for="login">Login</label>
+                <div *ngIf="formValid.login" class="form-text" id="loginHelp">
+                    Your login must contain only letters.
+                </div>
+            </div>
+            <div *ngIf="!formValid.login" class="alert alert-danger">
+                Incorect login
+            </div>
+           </div>
+            <div class="mb-3">
+                <div class="form-floating ">
+                    <input type="password" name="password" [(ngModel)]="user.password" aria-describedby="passwordHelp" #password='ngModel' id="password" class="form-control" autocomplete="off" placeholder="Password" required pattern="^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).{6,}$">
+                    <label for="password">Password</label>
+                    <div *ngIf="formValid.password" class="form-text" id="passwordHelp">
+                        Your password must be at least 6 characters long,contain at least one capital letter and digit.
+                    </div>
+                </div>
+                <div *ngIf="!formValid.password" class="alert alert-danger">
+                    Incorect password
+                </div>
+            </div>
+           <div class=" mb-3">
+            <div class="form-floating">
+                <input type="password" name="passwordRepeat" aria-describedby="passwordRepeatHelp" [(ngModel)]="PasswordRepeat" #passwordRepeat='ngModel' id="passwordRepeat" class="form-control" autocomplete="off" placeholder="Repeat password" required>
+                <label for="passwordRepeat">Repeat password</label>
+                <div *ngIf="formValid.passwordRepeat" class="form-text" id="passwordRepeatHelp">
+                    Just repeat your password above.
+                </div>
+            </div>
+            <div *ngIf="!formValid.passwordRepeat" class="alert alert-danger">
+                Please repeat password
+            </div>
+           </div>
+            <div class="mb-3">
+                <div class="form-floating ">
+                    <input type="text" name="email" [(ngModel)]="user.email" aria-describedby="emailHelp" #email='ngModel' id="email" class="form-control" autocomplete="off" placeholder="Email" required >
+                    <label for="email">Email</label>
+                    <div *ngIf="formValid.email" class="form-text" id="emailHelp">
+                        Email example name@gmail.com
+                    </div>
+                </div>
+                <div *ngIf="!formValid.email" class="alert alert-danger">
+                    Incorect email
+                </div>
+            </div>
+            
+            <div class="d-flex justify-content-center mb-3">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [(ngModel)]="user.sex" #sex='ngModel' name="gender" id="male" value="male" required>
+                    <label class="form-check-label" for="male">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [(ngModel)]="user.sex" #sex='ngModel' name="gender" id="female" value="female" required>
+                    <label class="form-check-label" for="female">Female</label>
+                </div>
+            </div>
+            <div *ngIf="!formValid.sex" class="alert alert-danger">
+                Choose you gender
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary" (click)='addUser()'>Register</button>
+            </div>
+        </div>
+    </form>
+</div>
