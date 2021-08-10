@@ -12,14 +12,14 @@ import { LoginComponent } from '../login/login.component';
 })
 export class PostsComponent implements OnInit {
   posts:Post[];
-  currentUser:User;
+  currentUser:User<string>;
   onAdminMode:boolean=false;
   showModalRemoveAll:boolean=false;
   showEditPanel:boolean=false;
   editIndex:number=-1;
-  constructor(private service:DataService,private loginComponent:LoginComponent) {
+  constructor(private dataService:DataService,private loginComponent:LoginComponent) {
     this.currentUser=this.loginComponent.user;
-    this.posts=this.service.posts;
+    this.posts=this.dataService.posts;
     this.onAdminMode=this.loginComponent.adminMode;
    }
    addedPost(value:Post[]):void{
@@ -31,8 +31,8 @@ export class PostsComponent implements OnInit {
    }
    processModalRemoveAll(value:boolean):void{
     if(value){
-      this.service.removeAllPosts();
-      this.posts=this.service.posts;
+      this.dataService.removeAllPosts();
+      this.posts=this.dataService.posts;
       this.showModalRemoveAll=false;
     }else{
       this.showModalRemoveAll=false;
@@ -42,7 +42,7 @@ export class PostsComponent implements OnInit {
     this.showModalRemoveAll=true;
   }
   removePost(index:number):void{
-    this.service.removePost(index);
+    this.dataService.removePost(index);
   }
   editPanel(index:number):void{
     this.editIndex=index;

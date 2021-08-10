@@ -14,7 +14,7 @@ import { DataService } from '../data.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  user:User={
+  user:User<string>={
     firstName:'',
     lastName:'',
     login:'',
@@ -29,44 +29,40 @@ export class RegisterComponent implements OnInit {
     lastName:true,
     login:true,
     password:true,
-    passwordRepeat:true,
     email:true,
-    sex:true
+    sex:true,
+    passwordRepeat:true
   }
   @Output() changeValue = new EventEmitter<boolean>();
-  constructor(private service:DataService) { }
+  constructor(private dataService:DataService) { }
 
   validateForm():boolean{
-    this.formValid.firstName=this.service.validateField(this.user.firstName,this.service.RegisterPatterns.firstName);
-    this.formValid.lastName=this.service.validateField(this.user.lastName,this.service.RegisterPatterns.lastName);
-    this.formValid.login=this.service.validateField(this.user.login,this.service.RegisterPatterns.login);
-    this.formValid.password=this.service.validateField(this.user.password,this.service.RegisterPatterns.password);
-    this.formValid.email=this.service.validateField(this.user.email,this.service.RegisterPatterns.email);
-    this.formValid.sex=this.service.validateField(this.user.sex,this.service.RegisterPatterns.sex);
+    
+    for (const key in this.formValid) {
+      if (Object.prototype.hasOwnProperty.call(this.formValid, key)) {
+        if(key==='passwordRepeat') continue;
+        this.formValid[key]=this.dataService.validateField(this.user[key],this.dataService.RegisterPatterns[key])
+        
+      }
+    }
     this.formValid.passwordRepeat=this.checkPassRepeat();
-    console.log();
     let res = Object.values(this.formValid);
-    return res.every((e)=>e===true)?true:false;
+    return res.every(e=>e);
     
   }
 
   addUser():void{
     if(this.validateForm()){
-      this.service.addUser(this.user);
+      this.dataService.addUser(this.user);
       this.changeValue.emit(false);
     }
   }
   checkPassRepeat():boolean{
-    if(this.PasswordRepeat==='') return false;
-    if(this.PasswordRepeat===this.user.password){
-      return true;
-    }else{
-      return false;
-    }
+   return this.PasswordRepeat===this.user.password;
   }
   invalidFieldCount():number{
     let res = Object.values(this.formValid);
-    return res.filter((e)=>e===false).length;
+    return res.filter(e=>!e).length;
   }
   ngOnInit(): void {
   }

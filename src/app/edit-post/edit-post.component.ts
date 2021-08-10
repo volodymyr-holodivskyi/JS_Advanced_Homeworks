@@ -19,27 +19,27 @@ export class EditPostComponent implements OnInit {
     author:''
   }
   @Output() editedPost = new EventEmitter<Post[]>();
-  constructor(private service:DataService) {
+  constructor(private dataService:DataService) {
    
    }
   editPost(theme:string,text:string):void{
     this.Epost.date=new Date().toLocaleString('en-GB');
     this.Epost.theme=theme;
     this.Epost.text=text;
-    this.service.editPost(this.index,this.Epost);
+    this.dataService.editPost(this.index,this.Epost);
     this.Epost={
       theme:'',
       text:'',
       date:'',
       author:''
     }
-    this.editedPost.emit(this.service.posts);
+    this.editedPost.emit(this.dataService.posts);
   }
   checkValidity(input:string):boolean{
     return input.length>0?true:false;
   }
   ngOnInit(): void {
-      this.Epost=this.service.posts[this.index];
+      this.Epost=this.dataService.posts[this.index];
   } 
 
 }

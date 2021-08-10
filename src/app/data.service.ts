@@ -1,22 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Type } from '@angular/core';
 
-export interface User{
-  firstName:string,
-  lastName:string,
-  login:string,
-  password:string,
-  email:string,
-  sex:string
+export interface User<Type>{
+  [firstName:string]:Type,
+  lastName:Type,
+  login:Type,
+  password:Type,
+  email:Type,
+  sex:Type
 }
-export interface RegisterFormValid{
-  firstName:boolean,
-  lastName:boolean,
-  login:boolean,
-  password:boolean,
+
+export interface RegisterFormValid extends User<boolean>{
   passwordRepeat:boolean,
-  email:boolean,
-  sex:boolean
- 
+}
+interface RegisterPatterns extends User<RegExp>{
 }
 
 export interface Post{
@@ -30,7 +26,7 @@ export interface Post{
   providedIn: 'root'
 })
 export class DataService {
-  RegisterPatterns={
+  RegisterPatterns:RegisterPatterns={
     firstName:/[A-Z][a-z]+/,
     lastName:/[A-Z][a-z]+/,
     login:/[a-zA-Z]+/,
@@ -39,7 +35,7 @@ export class DataService {
     sex:/[a-z]+/
   }
 
-  users:User[]=[
+  users:User<string>[]=[
     {
       firstName:'admin',
       lastName:'',
@@ -73,25 +69,22 @@ export class DataService {
     },
   ];
   posts:Post[]=[];
-  constructor() {
-
-   }
+  constructor() { }
    login(login:string,password:string):number{
      for (const user of this.users) {
        if(login===user.login&&password===user.password){
          return this.users.indexOf(user);
        }
-     }return -1;
+     }
+     return -1;
    }
    adminLogin(login:string,password:string){
-     if(login==='admin'&&password==='admin'){
-       return true;
-     }return false;
+     return login==='admin'&&password==='admin';
    }
    onInit():void{
-    localStorage.posts?this.posts=JSON.parse(localStorage.posts):this.posts=[];
+    this.posts=localStorage.posts?JSON.parse(localStorage.posts):[];
    }
-   addUser(newUser:User):void{
+   addUser(newUser:User<string>):void{
      this.users.push(newUser);
      localStorage.setItem('users',JSON.stringify(this.users));
    }
@@ -112,7 +105,7 @@ export class DataService {
      localStorage.removeItem('posts');
      this.posts=[];
    }
-   getUser(index:number):User{
+   getUser(index:number):User<string>{
      return this.users[index];
    }
    validateField(field:string,pattern:RegExp):boolean{

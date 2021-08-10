@@ -11,7 +11,7 @@ import { LoginComponent } from '../login/login.component';
   styleUrls: ['./add-post.component.css']
 })
 export class AddPostComponent implements OnInit {
-  currentUser:User;
+  currentUser:User<string>;
   post:Post={
     theme:'',
     text:'',
@@ -19,21 +19,21 @@ export class AddPostComponent implements OnInit {
     author:''
   }
   @Output() addedPost = new EventEmitter<Post[]>();
-  constructor(private service:DataService,private loginComponent:LoginComponent) {
+  constructor(private dataService:DataService,private loginComponent:LoginComponent) {
     this.currentUser=this.loginComponent.user;
    }
 
   addPost():void{
     this.post.date=new Date().toLocaleString('en-GB');
     this.post.author=this.currentUser.firstName+' '+this.currentUser.lastName;
-    this.service.addPost(this.post);
+    this.dataService.addPost(this.post);
     this.post={
       theme:'',
       text:'',
       date:'',
       author:''
     }
-    this.addedPost.emit(this.service.posts);
+    this.addedPost.emit(this.dataService.posts);
   }
   ngOnInit(): void {
   }

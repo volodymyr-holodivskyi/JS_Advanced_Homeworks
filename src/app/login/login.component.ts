@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   
   @Input() showRegisterForm:boolean=false;
   @Input() adminMode:boolean=false;
-  @Input() user:User={
+  @Input() user:User<string>={
     firstName:'',
     lastName:'',
     email:'',
@@ -23,23 +23,19 @@ export class LoginComponent implements OnInit {
     password:'',
     sex:''
   };
-  constructor(private service:DataService) {
+  constructor(private dataService:DataService) {
 
    }
 
   logIn(login:string,password:string):void{
-    if(this.service.login(login,password)>=0){
-      this.index=this.service.login(login,password);
+    if(this.dataService.login(login,password)>=0){
+      this.index=this.dataService.login(login,password);
       this.getUser(this.index);
       this.loginSuccess=true;
       this.showModal=false;
-      if(this.service.adminLogin(login,password)){
-        this.adminMode=true;
-      }else{
-        this.adminMode=false;
-      }
+      this.adminMode=this.dataService.adminLogin(login,password);
     }else{
-    this.index=this.service.login(login,password);
+    this.index=this.dataService.login(login,password);
     this.loginSuccess=false;
     this.showModal=true;
     }
@@ -48,13 +44,8 @@ export class LoginComponent implements OnInit {
     this.showRegisterForm=value;
   }
   processModal(value:boolean):void{
-    if(value){
-      this.showRegisterForm=true;
-      this.showModal=false;
-    }else{
-      this.showRegisterForm=false;
-      this.showModal=false;
-    }
+    this.showRegisterForm=value?true:false;
+    this.showModal=false;
   }
  
   
@@ -62,10 +53,10 @@ export class LoginComponent implements OnInit {
     this.loginSuccess=false;
   }
   getUser(index:number):void{
-    this.user=this.service.getUser(index);
+    this.user=this.dataService.getUser(index);
   }
   ngOnInit(): void {
-    this.service.onInit();
+    this.dataService.onInit();
     
     
   }
