@@ -1,0 +1,13 @@
+header{
+    height: 5vh;
+    padding: 10px;
+    background-color:cadetblue;
+    position: relative;
+}
+.datePicker{
+    position: absolute;
+    right: 1rem;
+}
+.companyName{
+    color:#e4d6cb;
+}

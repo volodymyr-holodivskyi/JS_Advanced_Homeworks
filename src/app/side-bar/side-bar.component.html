@@ -1,0 +1,15 @@
+<div class=" flex-column flex-wrap">
+    <button class=" btn btn-outline-primary" (click)='showCountryTable()'>Країна</button>
+    <button class=" btn btn-outline-primary" (click)='showHotelsTable()'>Забронювати готель</button>
+    <button class="  btn btn-outline-primary" (click)='showFlightsTable()'>Придбати авіаквиток</button>
+</div>
+<div *ngIf="modal" class="modal-con">
+    <div [class.moveModal]='modal' class="my-modal">
+        <div class="modal-message mb-5 text-center">
+            {{modalMessage}}
+        </div>
+        <div class="btn-con">
+            <button class="btn btn-danger" (click)="hideModal()">Закрити</button>
+        </div>
+    </div>
+</div>

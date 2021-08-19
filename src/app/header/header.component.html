@@ -1,0 +1,7 @@
+<header class="d-flex">
+    <div class="col-md-12 companyName text-center">Fast Travel</div>
+    <div class="datePicker">
+        <input type="date" [value]='currentDate' #datePicker (change)='changeDate(datePicker.value)' [min]='currentDate'>
+    </div>
+   
+</header>
