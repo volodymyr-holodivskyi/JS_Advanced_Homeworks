@@ -28,7 +28,8 @@ export class SideBarComponent implements OnInit {
   showCountryTable(){
     this.httpService.getCountries(this.currentDate,this.date).subscribe((data:Country[])=>{
       this.countries=data
-      this.countryTable.emit(this.countries)});
+      this.countryTable.emit(this.countries);
+    });
     
     
   }

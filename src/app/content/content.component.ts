@@ -4,6 +4,14 @@ import { Country } from '../models/country-model';
 import { Flight } from '../models/flight-model';
 import { Hotel } from '../models/hotel-model';
 
+interface BookData<type1,type2,type3>{
+  [key:string]:type1|type2|type3,
+  country:type1,
+  hotel:type2,
+  flight:type3
+}
+
+
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -14,26 +22,35 @@ export class ContentComponent implements OnInit {
   hotelsTable:boolean=false;
   flightsTable:boolean=false;
   date=new Date().toLocaleDateString();
-  countries:Country[]=[];
-  hotels:Hotel[]=[];
-  flights:Flight[]=[];
-  selectedCountries:Country[]=[];
-  selectedHotels:Hotel[]=[];
-  selectedFlights:Flight[]=[];
-  countryPageNumber:number=0;
-  hotelPageNumber:number=0;
-  flightPageNumber:number=0;
   elemsOnPage:number=10;
-  countriesToRender:Country[]=[];
-  hotelsToRender:Hotel[]=[];
-  flightsToRender:Flight[]=[];
+  
+  storage:BookData<Country[],Hotel[],Flight[]>={
+    country:[],
+    hotel:[],
+    flight:[]
+  }
+  selected:BookData<Country[],Hotel[],Flight[]>={
+    country:[],
+    hotel:[],
+    flight:[]
+  }
+  toRender:BookData<Country[],Hotel[],Flight[]>={
+    country:[],
+    hotel:[],
+    flight:[]
+  }
+  page:BookData<number,number,number>={
+    country:0,
+    hotel:0,
+    flight:0
+  }
   modal:boolean=false;
   modalMessage:string='';
   orderResponse:string='';
   constructor(private httpService:HttpService) { }
 
   showCountryTable(value:Country[]){
-    this.countries=value;
+    this.storage.country=value;
     this.countryTable=true;
     this.hotelsTable=false;
     this.flightsTable=false;
@@ -42,7 +59,7 @@ export class ContentComponent implements OnInit {
     
   }
   showHotelsTable(value:Hotel[]){
-    this.hotels=value;
+    this.storage.hotel=value;
     this.countryTable=false;
     this.flightsTable=false;
     this.hotelsTable=true;
@@ -50,7 +67,7 @@ export class ContentComponent implements OnInit {
     this.modal=false;
   }
   showFlightsTable(value:Flight[]){
-    this.flights=value;
+    this.storage.flight=value;
     this.countryTable=false;
     this.hotelsTable=false;
     this.flightsTable=true;
@@ -60,96 +77,49 @@ export class ContentComponent implements OnInit {
   setDate(value:string){
     this.date=value;
   }
+ 
   setChecked(type:string,index:number){
-    switch(type){
-      case "country":this.countries[index].checkStatus=!this.countries[index].checkStatus;break;
-      case 'hotel':this.hotels[index].checkStatus=!this.hotels[index].checkStatus;break;
-      case 'flight':this.flights[index].checkStatus=!this.flights[index].checkStatus;break;
-    }
+    this.storage[type][index].checkStatus=!this.storage[type][index].checkStatus;
   }
+ 
   select(type:string){
-    switch(type){
-      case 'country':this.selectedCountries=[];
-      for (const country of this.countries) {
-        if(country.checkStatus){
-          this.selectedCountries.push(country);
-        }
-      };break;
-      case 'hotel':this.selectedHotels=[];
-      for (const hotel of this.hotels) {
-        if(hotel.checkStatus){
-          this.selectedHotels.push(hotel);
-        }
-      };break;
-      case 'flight':this.selectedFlights=[];
-      for (const flight of this.flights) {
-        if(flight.checkStatus){
-          this.selectedFlights.push(flight);
-        }
-        this.modal=true;
-        this.modalMessage='Замовити обраний тур?';
-      };break;
-    }
+    let arr:Array<any>=[]
+    for (const item of this.storage[type]) {
+            if(item.checkStatus){
+              arr.push(item)
+            }
   }
+  this.selected[type]=arr;
+}
+
+
   render(type:string){
-    switch(type){
-      case 'country':this.countriesToRender=[];
-           for(let i=0;i<this.elemsOnPage&&this.elemsOnPage*this.countryPageNumber+i<this.countries.length;i++){
-            this.countriesToRender.push(this.countries[this.elemsOnPage*this.countryPageNumber+i])
-           }
-      break;
-      case 'hotel':this.hotelsToRender=[];
-           for(let i=0;i<this.elemsOnPage&&this.elemsOnPage*this.hotelPageNumber+i<this.hotels.length;i++){
-            this.hotelsToRender.push(this.hotels[this.elemsOnPage*this.hotelPageNumber+i])
-           }
-      break;
-      case 'flight':this.flightsToRender=[];
-           for(let i=0;i<this.elemsOnPage&&this.elemsOnPage*this.flightPageNumber+i<this.flights.length;i++){
-            this.flightsToRender.push(this.flights[this.elemsOnPage*this.flightPageNumber+i])
-           }
-           this.modal=true;
-           this.modalMessage='Замовити обраний тур?';
-      break;
+    this.toRender[type]=[];
+    for(let i=0;i<this.elemsOnPage&&this.elemsOnPage*this.page[type]+i<this.storage[type].length;i++){
+      this.toRender[type][i]=this.storage[type][this.elemsOnPage*this.page[type]+i];
     }
-  
-    
   }
+
   nextPage(type:string){
-    switch(type){
-      case 'country': if(this.countryPageNumber<Math.round(this.countries.length/this.elemsOnPage)){
-        this.countryPageNumber++;
+      if(this.page[type]<Math.fround(this.storage[type].length/this.elemsOnPage)&&this.storage[type].length>this.elemsOnPage){
+        this.page[type]++;
         this.render(type);
-      }break;
-      case 'hotel': if(this.hotelPageNumber<Math.round(this.hotels.length/this.elemsOnPage)){
-        this.hotelPageNumber++;
-        this.render(type);
-      }break;
-      case 'flight': if(this.flightPageNumber<Math.round(this.flights.length/this.elemsOnPage)){
-        this.flightPageNumber++;
-        this.render(type);
-        this.modal=false;
-      }break;
+      }
     }
-    
-    
-  }
+
   prevPage(type:string){
-    switch(type){
-      case 'country':if(this.countryPageNumber>=1){
-        this.countryPageNumber--;
-        this.render(type);
-      }break;
-      case 'hotel':if(this.hotelPageNumber>=1){
-        this.hotelPageNumber--;
-        this.render(type);
-      }break;
-      case 'flight':if(this.flightPageNumber>=1){
-        this.flightPageNumber--;
-        this.render(type);
-        this.modal=false;
-      }break;
+    if(this.page[type]>=1){
+      this.page[type]--;
+      this.render(type);
     }
   }
+
+  book(){
+    this.select('flight');
+    this.modal=true;
+    this.modalMessage='Замовити обраний тур?';
+  }
+
   hideModal(){
     this.modal=false;
     this.orderResponse='';

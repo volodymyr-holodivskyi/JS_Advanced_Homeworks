@@ -1,6 +1,6 @@
 <app-header (setDate)='setDate($event)'></app-header>
 <div class="d-flex content">
-    <app-side-bar class="col-md-1" [selectedHotels]='selectedHotels' [selectedCountries]='selectedCountries' [date]='date' (countryTable)='showCountryTable($event)' (hotelsTable)='showHotelsTable($event)' (flightsTable)='showFlightsTable($event)'></app-side-bar>
+    <app-side-bar class="col-md-1" [selectedHotels]='selected.hotel' [selectedCountries]='selected.country' [date]='date' (countryTable)='showCountryTable($event)' (hotelsTable)='showHotelsTable($event)' (flightsTable)='showFlightsTable($event)'></app-side-bar>
     <div class="col-md-11 d-flex justify-content-center align-items-center">
         <div class="container" *ngIf="!countryTable&&!hotelsTable&&!flightsTable">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae, voluptatem veniam similique est nesciunt rerum saepe, officia dolorum animi culpa sit odio mollitia natus, eos perspiciatis obcaecati sed dicta accusantium fuga ratione incidunt nam unde! Ab doloribus accusamus facere unde excepturi sint alias fuga, enim sit velit a eligendi aut modi eum vel asperiores totam, quod maiores harum eaque tempore ipsam! Soluta eaque dignissimos veritatis est, perferendis sint sed iure fugiat voluptatem, tenetur non, asperiores earum! Nobis cum pariatur hic, sint sequi optio velit. Alias modi hic suscipit recusandae et optio ex voluptates reiciendis similique. A laborum harum nisi vitae.
@@ -20,9 +20,9 @@
                 <tbody>
 
                 
-                <tr *ngFor="let country of countriesToRender;let i=index" [class.table-secondary]='country.travelStatus==="Недоступна"' [class.table-success]='country.checkStatus'>
-                    <th scope="row">{{elemsOnPage*countryPageNumber+i+1}}</th>
-                    <td><input class="col-md-1 form-check-input" [disabled]='country.travelStatus==="Недоступна"' type="checkbox" [checked]='country.checkStatus' (change)='setChecked("country",elemsOnPage*countryPageNumber+i)'></td>
+                <tr *ngFor="let country of toRender.country;let i=index" [class.table-secondary]='country.travelStatus==="Недоступна"' [class.table-success]='country.checkStatus'>
+                    <th scope="row">{{elemsOnPage*page.country+i+1}}</th>
+                    <td><input class="col-md-1 form-check-input" [disabled]='country.travelStatus==="Недоступна"' type="checkbox" [checked]='country.checkStatus' (change)='setChecked("country",elemsOnPage*page.country+i)'></td>
                     <td >{{country?.name}}</td>
                     <td >{{country?.travelStatus}}</td>
                     <td >{{country?.hotelsCount}}</td>
@@ -52,9 +52,9 @@
                 <tbody>
 
                
-                <tr *ngFor="let hotel of hotelsToRender;let i=index" [class.table-secondary]='hotel.slotsCount===0' [class.table-success]='hotel.checkStatus'>
-                    <th scope="row">{{elemsOnPage*hotelPageNumber+i+1}}</th>
-                    <td><input class="col-md-1 form-check-input" [disabled]='hotel.slotsCount===0' type="checkbox" [checked]='hotel.checkStatus' (change)='setChecked("hotel",elemsOnPage*hotelPageNumber+i)'></td> 
+                <tr *ngFor="let hotel of toRender.hotel;let i=index" [class.table-secondary]='hotel.slotsCount===0' [class.table-success]='hotel.checkStatus'>
+                    <th scope="row">{{elemsOnPage*page.hotel+i+1}}</th>
+                    <td><input class="col-md-1 form-check-input" [disabled]='hotel.slotsCount===0' type="checkbox" [checked]='hotel.checkStatus' (change)='setChecked("hotel",elemsOnPage*page.hotel+i)'></td> 
                     <td >{{hotel?.name}}</td>
                     <td >{{hotel?.slotsCount}}</td>
                     <td >{{hotel?.city}}</td>
@@ -83,9 +83,9 @@
                         <th scope="col">Дата рейсу</th>
                     </tr>
                 </thead>
-               <tbody><tr *ngFor="let flight of flightsToRender;let i=index" [class.table-success]='flight.checkStatus'>
-                    <th scope="row">{{elemsOnPage*flightPageNumber+i+1}}</th>
-                   <td> <input class="col-md-1 form-check-input" type="checkbox" [checked]='flight.checkStatus' (change)='setChecked("flight",elemsOnPage*flightPageNumber+i)'></td>
+               <tbody><tr *ngFor="let flight of toRender.flight;let i=index" [class.table-success]='flight.checkStatus'>
+                    <th scope="row">{{elemsOnPage*page.flight+i+1}}</th>
+                   <td> <input class="col-md-1 form-check-input" type="checkbox" [checked]='flight.checkStatus' (change)='setChecked("flight",elemsOnPage*page.flight+i)'></td>
                     <td >{{flight?.companyName}}</td>
                     <td >{{flight?.slotsCount}}</td>
                     <td >{{flight?.route}}</td>
@@ -98,13 +98,13 @@
                 <button class="btn btn-reverse" (click)="prevPage('flight')">➤</button>
                 
             
-            <button class="btn btn-primary" (click)="select('flight')">Обрати</button>
+            <button class="btn btn-primary" (click)="book()">Обрати</button>
             <button class="btn" (click)="nextPage('flight')">➤</button>
         </div>
         </div>
     </div>
 </div>
-<div *ngIf="selectedCountries.length>0&&selectedHotels.length>0&&selectedFlights.length>0&&modal" class="modal-con">
+<div *ngIf="selected.country.length>0&&selected.hotel.length>0&&selected.flight.length>0&&modal" class="modal-con">
     <div class="my-modal container">
         <div class="modal-message mb-3 text-center">
             {{modalMessage}}

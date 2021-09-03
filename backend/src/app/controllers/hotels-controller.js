@@ -14,13 +14,10 @@ function getHotels(req,res){
             countriesToSql+=`hotels.CountryName='${selectedCountries[i]}' or `;
         }
     }
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.header('Access-Control-Allow-Methods', 'GET, PATCH, PUT, POST, DELETE, OPTIONS');
     return hotelsService.getHotels(startDate,endDate,countriesToSql)
-    .then(rows=>{ console.log(rows);
-        return res.status(200).json(rows)})
-    .catch(err=>res.status(500).json(err));
+                        .then(rows=>{ console.log(rows);
+                         return res.status(200).json(rows)})
+                        .catch(err=>res.status(500).json(err));
 }
 
 module.exports={

@@ -15,9 +15,6 @@ function getFlights(req,res){
             citiesToSql+=`${selectedCities[i]}|`;
         }
     }
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.header('Access-Control-Allow-Methods', 'GET, PATCH, PUT, POST, DELETE, OPTIONS');
     return flightsService.getFlights(startDate,endDate,citiesToSql)
             .then(rows=>{ console.log(rows);
                 return res.status(200).json(rows)})
