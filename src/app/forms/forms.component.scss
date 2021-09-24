@@ -1,0 +1,149 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.forms {
+  padding: 1em;
+  display: flex;
+}
+h3 {
+  color: rgb(95, 94, 94);
+  margin: 1rem 0;
+}
+form {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+.form-con {
+  width: 50%;
+}
+.relative {
+  position: relative;
+}
+textarea {
+  resize: none;
+  border: none;
+  font-family: sans-serif;
+  font-size: 1em;
+  height: 1.5em;
+  width: 100%;
+  margin: 1rem 0;
+}
+textarea:focus {
+  outline: none;
+  border-bottom: 2px solid rgb(207, 177, 3);
+}
+textarea::placeholder {
+  font-family: sans-serif;
+  color: black;
+}
+select {
+  width: 100%;
+  font-size: 1.2em;
+  padding: 5px;
+  margin: 1rem 0;
+}
+select.ng-invalid.ng-pristine,
+input.ng-invalid.ng-pristine {
+  border-color: red;
+}
+select.ng-valid.ng-pristine,
+input.ng-valid.ng-pristine {
+  border-color: green;
+}
+
+select.ng-pristine.ng-untouched,
+.unselected {
+  color: rgb(95, 94, 94);
+}
+.btn-con {
+  width: 20%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-evenly;
+}
+.checkbox-con {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 1.2em;
+  user-select: none;
+}
+
+.checkbox-con input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1.3em;
+  width: 1.3em;
+  border: 2px solid gray;
+  border-radius: 10%;
+  background-color: #eee;
+}
+
+button {
+  padding: 0.5em;
+  border-radius: 15%;
+  border: 1px solid gray;
+}
+
+.checkbox-con:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+.checkbox-con input:checked ~ .checkmark {
+  background-color: #f0f321;
+  border: none;
+}
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.checkbox-con input:checked ~ .checkmark:after {
+  display: block;
+}
+.checkbox-con .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+@media (max-width: 1024px) and (min-width: 558px) {
+  .form-con {
+    width: 98%;
+  }
+  .btn-con {
+    width: 40%;
+  }
+}
+@media (max-width: 558px) {
+  .form-con {
+    width: 100%;
+  }
+  .forms {
+    display: block;
+  }
+  form {
+    width: 100%;
+  }
+  .btn-con {
+    width: 50%;
+  }
+}

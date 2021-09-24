@@ -1,0 +1,127 @@
+<div class="forms">
+  <form [formGroup]="firstStepForm">
+    <div class="form-con">
+      <h1>POST A JOB</h1>
+      <h3>Step 1</h3>
+      <div>
+        <select formControlName="mark">
+          <option value="" selected disabled>Mark</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
+      <div>
+        <select formControlName="model">
+          <option value="" selected disabled>Model</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
+      <div>
+        <select formControlName="year">
+          <option value="" selected disabled>Year</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
+      <div class="relative">
+        <textarea
+          placeholder="What exactly need to be repaired?"
+          formControlName="desc"
+        ></textarea>
+      </div>
+    </div>
+  </form>
+  <form *ngIf="firstStepForm.valid" [formGroup]="secondStepForm">
+    <div class="form-con">
+      <h1>POST A JOB</h1>
+      <h3>Step 2</h3>
+      <div>
+        <select formControlName="category">
+          <option value="" selected disabled>Category of work</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
+      <div>
+        <select formControlName="subcategory">
+          <option value="" selected disabled>Subcategory</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
+      <div>
+        <select formControlName="emirate">
+          <option value="" selected disabled>Select Emirate</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
+      <div>
+        <select formControlName="area">
+          <option value="" selected disabled>Select Area</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
+      <label
+        for="towTruck"
+        class="checkbox-con"
+        [ngClass]="{ unselected: !secondStepForm.value['towTruck'] }"
+        >Need car Pickup
+        <input
+          type="checkbox"
+          name="towTruck"
+          id="towTruck"
+          formControlName="towTruck"
+        />
+        <span class="checkmark"></span>
+      </label>
+      <label
+        for="carPickup"
+        class="checkbox-con"
+        [ngClass]="{ unselected: !secondStepForm.value['carPickup'] }"
+        >Need car Pickup
+        <input
+          type="checkbox"
+          name=""
+          id="carPickup"
+          formControlName="carPickup"
+        />
+        <span class="checkmark"></span>
+      </label>
+      <label
+        for="customParts"
+        class="checkbox-con"
+        [ngClass]="{ unselected: !secondStepForm.value['customParts'] }"
+        >Custom Parts
+        <input
+          type="checkbox"
+          name=""
+          id="customParts"
+          formControlName="customParts"
+        />
+        <span class="checkmark"></span>
+      </label>
+      <div>
+        <input type="date" name="" id="" formControlName="desiredDate" />
+      </div>
+    </div>
+  </form>
+</div>
+<div class="btn-con">
+  <button
+    (click)="send()"
+    [disabled]="firstStepForm.invalid || secondStepForm.invalid"
+  >
+    Send
+  </button>
+  <button (click)="clear()">Clear</button>
+</div>
